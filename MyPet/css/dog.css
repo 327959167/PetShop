@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    margin-top: 20px;
+}
+
+.box .tbody tr td {
+    padding: 5px !important;
+    vertical-align: middle !important;
+}
+
+.box .tbody tr td a {
+    letter-spacing: 4px;
+    font-size: 12px;
+}
+
+#myhome {
+    margin-top: -35px;
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#myhome:hover {
+    color: teal;
+}

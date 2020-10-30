@@ -1,0 +1,48 @@
+.registerBox {
+  background-color: #fff;
+  margin: 20px auto;
+  padding: 30px 50px 100px;
+  min-width: 670px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+}
+
+.registerBox .formBox h1 {
+  text-align: center;
+}
+
+.registerBox .formBox div {
+  margin-top: 20px;
+}
+
+.registerBox .formBox div input {
+  height: 50px;
+}
+
+.registerBox .formBox div:nth-of-type(5) input {
+  padding: 12px 40px;
+}
+
+.registerBox .formBox div:nth-of-type(6) input {
+  width: 200px !important;
+}
+
+#error span {
+  color: red;
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#picyzm {
+  float: right;
+  margin-right: 68%;
+  height: 42px;
+}
+
+#hyz {
+  position: absolute;
+  top: 25px;
+  left: 38%;
+  cursor: pointer;
+}

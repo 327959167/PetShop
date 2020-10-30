@@ -1,0 +1,14 @@
+.personBox {
+    width: 50%;
+    margin: 20px auto;
+    padding-top: 20px;
+    border-radius: 15px;
+    border: 2px solid teal;
+}
+
+.personBox p {
+    text-indent: 4rem;
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柚乐趣宠物注册页面</title>
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/register.css">
+
+
+</head>
+
+<body>
+    <div class="box">
+        <div class="container registerBox">
+            <form class="formBox" enctype="multipart/form-data">
+                <h1>柚乐趣宠物店账号注册</h1>
+                <div class="form-group">
+                    <!-- 昵称 -->
+                    <div class="input-group">
+                        <div class="input-group-addon">昵称</div>
+                        <input type="text" class="form-control nickname" placeholder="Please enter you nickname">
+                    </div>
+                    <!-- 昵称 -->
+                    <!-- name -->
+                    <div class="input-group">
+                        <div class="input-group-addon">实名</div>
+                        <input type="text" class="form-control username" placeholder="Please enter you username">
+                    </div>
+                    <!-- name -->
+                    <!-- 密码 -->
+                    <div class="input-group">
+                        <div class="input-group-addon">密码</div>
+                        <input type="password" class="form-control password" placeholder="Please enter you password">
+                    </div>
+                    <!-- 密码 -->
+                    <!-- 确认密码 -->
+                    <div class="input-group">
+                        <div class="input-group-addon">确认密码</div>
+                        <input type="password" class="form-control passwordConfirm"
+                            placeholder="Please enter you confirm password">
+                    </div>
+                    <!-- 确认密码 -->
+                    <!-- 选择头像 -->
+                    <div class="input-group">
+                        <div class="input-group-addon">选择头像</div>
+                        <input type="file" class="form-control Headportrait" onchange="upload(this)">
+                    </div>
+                    <!-- 选择头像 -->
+                    <!-- 验证码 -->
+                    <div id="verifyCodeDemo" class="input-group">
+                        <div class="input-group-addon">验证码</div>
+                        <input type="text" id="code_input" class="VerificationCode form-control"
+                            placeholder="Please enter verificationCode">
+                        <p id="picyzm"></p>
+                    </div>
+                    <!-- 验证码 -->
+                </div>
+                <div id="error">
+                    <span class="errorTxt">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span> <span>！！！ </span>
+                </div>
+                <br>
+                <br>
+                <a type="button" class="btn btn-primary btn-lg btn-block register">注册</a>
+            </form>
+        </div>
+    </div>
+    <script src="../../js/register.js"></script>
+    <script>
+        // 昵称
+        $('.nickname').blur(function () {
+            var nickname = $('.nickname').val();
+            if (nickname.trim().length == 0) {
+                $('.errorTxt').text('昵称不能为空！');
+            } else if (nickname.trim().length > 12) {
+                $('.errorTxt').text('昵称长度不能超过12位！');
+                $('.nickname').val('');
+            }
+        });
+        // 实名
+        $('.username').blur(function () {
+            var username = $('.username').val();
+            var reg = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
+            if (username.trim().length == 0) {
+                $('.errorTxt').text('实名不能为空！');
+            } else if (!reg.exec(username)) {
+                $('.errorTxt').text('实名长度为2~12位，只能为中文和点！');
+                $('.username').val('');
+            }
+        });
+        // 密码
+        $('.password').blur(function () {
+            var password = $('.password').val();
+            if (password.trim().length == 0) {
+                $('.errorTxt').text('密码不能为空！');
+            } else if (password.trim().length < 6 || password.trim().length > 24) {
+                $('.errorTxt').text('密码长度为6~24位！');
+                $('.password').val('');
+            }
+        });
+        // 确认密码
+        $('.passwordConfirm').blur(function () {
+            var passwordConfirm = $('.passwordConfirm').val();
+            if (passwordConfirm.trim().length == 0) {
+                $('.errorTxt').text('确认密码不能为空！');
+            }
+        });
+        // 图形验证码
+        $('.VerificationCode').blur(function () {
+            var VerificationCode = $('.VerificationCode').val();
+            if (VerificationCode.trim().length == 0) {
+                $('.errorTxt').text('图形验证码不能为空！');
+            }
+        });
+
+        //初始化验证码
+        var verifyCode = new GVerify({
+            id: "picyzm",
+            type: "blend"
+        });
+
+        // 获取file
+        // function upload(obj) {
+        //     var fileArray = obj.files;
+        //     var formData = new FormData();
+        //     for (var i = 0; i < fileArray.length; i++) {
+        //         formData.append("fileArray", fileArray[i]);
+        //     }
+        //     $.ajax({
+        //         type: "post",
+        //         url: "../register/register.php",
+        //         data: formData,
+        //         // dataType: 'json',
+        //         async: false,
+        //         cache: false, //不设置缓存
+        //         processData: false, // 不处理数据
+        //         contentType: false, // 不设置内容类型
+        //         success: function (data) {
+        //             console.log(data);
+        //         },
+        //         error: function () {
+        //             console.log("上传错误");
+        //         }
+        //     });
+        // }
+
+
+        $(function () {
+            // 注册
+            $('.register').click(function () {
+                // 昵称
+                var nickname = $('.nickname').val();
+                // 用户名
+                var username = $('.username').val();
+                // 密码
+                var password = $('.password').val();
+                // 确认密码
+                var passwordConfirm = $('.passwordConfirm').val();
+                // 验证码
+                var VerificationCode = $('.VerificationCode').val();
+                // 图形验证码--后台
+                var res = verifyCode.validate(VerificationCode);
+
+                // 密码验证
+                if (password != passwordConfirm) {
+                    $('.errorTxt').text('确认密码与密码不一致！');
+                    $('.passwordConfirm').val("");
+                    return;
+                }
+
+                // 验证码验证
+                if (!res) {
+                    $('.errorTxt').text('验证码错误！');
+                    $('.VerificationCode').val("");
+                    return;
+                }
+
+                if (nickname.trim().length != 0 && username.trim().length != 0 && password.trim()
+                    .length != 0 && passwordConfirm.trim().length != 0 && VerificationCode.trim()
+                    .length != 0) {
+                    $.ajax({
+                        type: 'post',
+                        url: '../register/register.php',
+                        data: {
+                            nickname: nickname,
+                            username: username,
+                            password: password,
+                        },
+                        success: function (responseText) {
+                            alert(responseText);
+                            window.location = "../login.html";
+                        },
+                        error: function () {
+                            alert("致命错误！！！");
+                        }
+
+                    });
+                } else {
+                    $('.errorTxt').text('请填写完整信息！');
+                }
+
+            });
+        })
+    </script>
+</body>
+
+</html>
